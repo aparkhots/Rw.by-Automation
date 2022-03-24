@@ -20,7 +20,7 @@ namespace Rw.byPageTests
             _webDriver = Handlers.ChooseBrowser(browser);
 
             var googleSearcher = new GoogleSearcherPageObject(_webDriver);
-            googleSearcher.Searching();
+            googleSearcher.Searching("белорусская железная дорога");
 
             Handlers.CheckLoading(_webDriver);
         }
@@ -34,8 +34,8 @@ namespace Rw.byPageTests
             var mainPage = new MainPageObject(_webDriver);
 
             mainPage.ChooseLaguage("en");
-            mainPage.CheckNewsCount();
-            mainPage.CheckCopyright();
+            mainPage.CheckNewsCount(4);
+            mainPage.CheckCopyright("© 2022 Belarusian Railway");
             mainPage.CheckButtonsPresent();
         }
 

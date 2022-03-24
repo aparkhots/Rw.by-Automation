@@ -24,22 +24,22 @@ namespace Rw.byPageTests.PageObjects
             return new MainPageObject(_webDriver);
         }
 
-        public void CheckNewsCount()
+        public void CheckNewsCount(int minNewsCount)
         {
             var newsCount = _webDriver
                 .FindElement(By.ClassName("index-news-list"))
                 .FindElements(By.TagName("dt"))
                 .Count;
 
-            Assert.IsTrue(newsCount >= 4);
+            Assert.IsTrue(newsCount >= minNewsCount);
         }
 
-        public void CheckCopyright()
+        public void CheckCopyright(string copyrightString)
         {
             var copyright = _webDriver
                 .FindElement(By.ClassName("copyright"))
                 .Text
-                .Contains("© 2022 Belarusian Railway");
+                .Contains(copyrightString);
 
             Assert.IsTrue(copyright);
         }

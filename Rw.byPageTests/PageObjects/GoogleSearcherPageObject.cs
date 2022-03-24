@@ -21,10 +21,10 @@ namespace Rw.byPageTests.PageObjects
 
         }
 
-        public void Searching()
+        public void Searching(string searchingString)
         {
             
-            _webDriver.FindElement(googleSearchInput).SendKeys("белорусская железная дорога");
+            _webDriver.FindElement(googleSearchInput).SendKeys(searchingString);
 
             Thread.Sleep(300);
 
