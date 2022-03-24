@@ -1,7 +1,10 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Threading;
+using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 
@@ -33,6 +36,43 @@ namespace Rw.byPageTests
                 Console.WriteLine("__________________________________");
             }
 
+        }
+
+        public static IWebDriver Chrome()
+        {
+            var driverOptionsChrome = new ChromeOptions();
+            driverOptionsChrome.AddArgument(" --no-sandbox");
+            return new ChromeDriver(driverOptionsChrome);
+        }
+
+        public static IWebDriver Edge()
+        {
+            var driverOptionsEdge = new EdgeOptions();
+            driverOptionsEdge.AddArgument(" --no-sandbox");
+            return new EdgeDriver(driverOptionsEdge);
+        }
+        public static IWebDriver ChooseBrowser(string browser)
+        {
+            IWebDriver choosenDriver = null;
+            switch (browser)
+            {
+                case "chrome":
+                    choosenDriver = Chrome();
+                    break;
+                case "edge":
+                    choosenDriver = Edge();
+                    break;
+            }
+
+            return choosenDriver;
+        }
+
+        public static void CheckLoading(IWebDriver driver)
+        {
+            int firstCountElements = driver.FindElements(By.TagName("div")).Count;
+            Thread.Sleep(500);
+            int secondCountElements = driver.FindElements(By.TagName("div")).Count;
+            Assert.AreEqual(firstCountElements,secondCountElements);
         }
     }
 }

@@ -2,12 +2,9 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using NUnit.Framework.Constraints;
+using System.IO.Compression;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Rw.byPageTests.PageObjects;
 
 namespace Rw.byPageTests
@@ -16,53 +13,41 @@ namespace Rw.byPageTests
     {
         private IWebDriver _webDriver;
 
-        public static IEnumerable<IWebDriver> SetBrowsers
+        [TestCase("chrome")]
+        [TestCase("edge")]
+        public void Test1_OpeningSiteFromGoogle(string browser)
         {
-            get
-            {
-                {
-                    var driverOptionsChrome = new ChromeOptions();
-                    driverOptionsChrome.AddArgument(" --no-sandbox");
-                    yield return new ChromeDriver(driverOptionsChrome);
-                }
+            _webDriver = Handlers.ChooseBrowser(browser);
 
-                {
-                    var driverOptions = new EdgeOptions();
-                    driverOptions.AddArgument(" --no-sandbox");
-                    yield return new EdgeDriver(driverOptions);
-                }
-
-            }
-        }
-
-        [TestCaseSource(nameof(SetBrowsers))]
-        public void Test1_OpeningSiteFromGoogle(IWebDriver driver)
-        {
-            _webDriver = driver;
             var googleSearcher = new GoogleSearcherPageObject(_webDriver);
             googleSearcher.Searching();
 
             //how to Check the page is load fine?
         }
 
-        [TestCaseSource(nameof(SetBrowsers))]
-        public void Test2_WorkWithTheMainPage(IWebDriver driver)
+        [TestCase("chrome")]
+        [TestCase("edge")]
+        public void Test2_WorkWithTheMainPage(string browser)
         {
-            _webDriver = driver;
+            _webDriver = Handlers.ChooseBrowser(browser);
+
             var mainPage = new MainPageObject(_webDriver);
 
             mainPage.ChooseLaguage("en");
             mainPage.CheckNewsCount();
             mainPage.CheckCopyright();
             mainPage.CheckButtonsPresent();
+
+            Handlers.CheckLoading(_webDriver);
         }
 
 
-
-        [TestCaseSource(nameof(SetBrowsers))]
-        public void Test3_WorkWithSearch(IWebDriver driver)
+        [TestCase("chrome")]
+        [TestCase("edge")]
+        public void Test3_WorkWithSearch(string browser)
         {
-            _webDriver = driver;
+            _webDriver = Handlers.ChooseBrowser(browser);
+
             var mainPage = new MainPageObject(_webDriver);
 
             var randomString = Handlers.GenerateRandomString();
@@ -79,11 +64,12 @@ namespace Rw.byPageTests
             searcherPage.CheckResultsCount(results.Count, 15);
         }
 
-        [TestCaseSource(nameof(SetBrowsers))]
-        public void Test4_WorkWithCalendar(IWebDriver driver)
+        [TestCase("chrome")]
+        [TestCase("edge")]
+        public void Test4_WorkWithCalendar(string browser)
         {
+            _webDriver = Handlers.ChooseBrowser(browser);
 
-            _webDriver = driver;
             var mainPage = new MainPageObject(_webDriver);
 
 
@@ -96,7 +82,7 @@ namespace Rw.byPageTests
 
             _webDriver.FindElement(By.XPath("//img[@alt = 'БелЖД']")).Click();
 
-            //how to Check the page is load fine?
+            Handlers.CheckLoading(_webDriver);
         }
 
         [TearDown]
