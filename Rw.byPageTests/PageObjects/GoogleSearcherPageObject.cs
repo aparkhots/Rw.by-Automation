@@ -8,7 +8,7 @@ namespace Rw.byPageTests.PageObjects
 {
     class GoogleSearcherPageObject
     {
-        private IWebDriver _webDriver;
+        private readonly IWebDriver _webDriver;
 
         private readonly By googleSearchInput = By.XPath("//input[@name = 'q']");
         private readonly By googleSearchButton = By.XPath("//input[@name= 'btnK']");
