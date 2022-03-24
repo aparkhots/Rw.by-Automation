@@ -1,10 +1,5 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using System.Collections.Generic;
-using System.IO.Compression;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Rw.byPageTests.PageObjects;
 
 namespace Rw.byPageTests
