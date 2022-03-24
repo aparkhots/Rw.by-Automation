@@ -22,7 +22,7 @@ namespace Rw.byPageTests
             var googleSearcher = new GoogleSearcherPageObject(_webDriver);
             googleSearcher.Searching();
 
-            //how to Check the page is load fine?
+            Handlers.CheckLoading(_webDriver);
         }
 
         [TestCase("chrome")]
@@ -37,8 +37,6 @@ namespace Rw.byPageTests
             mainPage.CheckNewsCount();
             mainPage.CheckCopyright();
             mainPage.CheckButtonsPresent();
-
-            Handlers.CheckLoading(_webDriver);
         }
 
 

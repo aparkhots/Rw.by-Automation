@@ -69,6 +69,7 @@ namespace Rw.byPageTests
 
         public static void CheckLoading(IWebDriver driver)
         {
+            Thread.Sleep(500);
             int firstCountElements = driver.FindElements(By.TagName("div")).Count;
             Thread.Sleep(500);
             int secondCountElements = driver.FindElements(By.TagName("div")).Count;
