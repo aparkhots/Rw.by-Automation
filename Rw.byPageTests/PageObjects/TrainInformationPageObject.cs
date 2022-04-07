@@ -23,7 +23,7 @@ namespace Rw.byPageTests.PageObjects
         public void CheckCruiseTimeTable()
         {
             var cruiseTimetable = _webDriver
-                .FindElement(By.XPath("//div[@class = 'sch-title__descr']"))
+                .FindElement(By.ClassName("sch-title__descr"))
                 .Text[19..];
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(cruiseTimetable));

@@ -34,7 +34,7 @@ namespace Rw.byPageTests.PageObjects
         public TrainInformationPageObject FirstResultTrain()
         {
             _webDriver
-                .FindElements(By.XPath("//span[@class = 'train-route']"))
+                .FindElements(By.ClassName("train-route"))
                 .First()
                 .Click();
             return new TrainInformationPageObject(_webDriver);

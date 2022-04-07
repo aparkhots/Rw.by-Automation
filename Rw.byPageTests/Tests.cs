@@ -65,7 +65,6 @@ namespace Rw.byPageTests
 
             var mainPage = new MainPageObject(_webDriver);
 
-
             var schedulePage = mainPage.SearchTrain("Минск-Пассажирский","Брест-Центральный",5);
             schedulePage.TrainsScheduleConsoleResult();
 
@@ -73,7 +72,7 @@ namespace Rw.byPageTests
             trainInformationPage.CheckTrainTitleVisibility();
             trainInformationPage.CheckCruiseTimeTable();
 
-            _webDriver.FindElement(By.XPath("//img[@alt = 'БелЖД']")).Click();
+            Handlers.GoToGeneral(_webDriver);
 
             Handlers.CheckLoading(_webDriver);
         }

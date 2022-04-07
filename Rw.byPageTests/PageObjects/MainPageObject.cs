@@ -59,7 +59,7 @@ namespace Rw.byPageTests.PageObjects
 
         public SearcherPageObject SearchInput(string searchingString)
         {
-            _webDriver.FindElement(By.XPath("//input[@id = 'searchinp']")).SendKeys(searchingString);
+            _webDriver.FindElement(By.Id("searchinp")).SendKeys(searchingString);
             _webDriver.FindElement(By.XPath("//button[@type = 'submit']")).Click();
             return new SearcherPageObject(_webDriver);
         }
@@ -67,16 +67,16 @@ namespace Rw.byPageTests.PageObjects
         public SchedulePageObject SearchTrain(string trainFrom, string trainTo, int days)
         {
             _webDriver
-                .FindElement(By.XPath("//input[@id = 'acFrom']"))
+                .FindElement(By.Id("acFrom"))
                 .SendKeys(trainFrom);
             _webDriver
-                .FindElement(By.XPath("//input[@id = 'acTo']"))
+                .FindElement(By.Id("acTo"))
                 .SendKeys(trainTo);
 
 
             var dateTimeForCalendar = DateTime.Today.AddDays(days).ToString("dd.MM.yyyy") + "\n";
 
-            _webDriver.FindElement(By.XPath("//input[@id = 'yDate']")).SendKeys(dateTimeForCalendar);
+            _webDriver.FindElement(By.Id("yDate")).SendKeys(dateTimeForCalendar);
             _webDriver.FindElement(By.XPath("//input[@type = 'submit']")).Click();
 
             return new SchedulePageObject(_webDriver);

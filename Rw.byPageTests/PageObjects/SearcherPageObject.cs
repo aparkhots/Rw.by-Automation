@@ -29,7 +29,7 @@ namespace Rw.byPageTests.PageObjects
 
         public ReadOnlyCollection<IWebElement> Search(string searchingString)
         {
-            var searher = _webDriver.FindElement(By.XPath("//input[@id = 'searchinpm']"));
+            var searher = _webDriver.FindElement(By.Id("searchinpm"));
             searher.Clear();
             searher.SendKeys(searchingString);
 

@@ -74,5 +74,12 @@ namespace Rw.byPageTests
             int secondCountElements = driver.FindElements(By.TagName("div")).Count;
             Assert.AreEqual(firstCountElements,secondCountElements);
         }
+
+        public static void GoToGeneral(IWebDriver driver)
+        {
+            driver
+                .FindElement(By.XPath("//img[@alt = 'БелЖД']"))
+                .Click();
+        }
     }
 }
